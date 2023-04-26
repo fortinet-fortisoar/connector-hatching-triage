@@ -1,0 +1,857 @@
+{
+  "name": "hatching-triage",
+  "version": "1.0.0",
+  "label": "Hatching Triage",
+  "category": "Threat Intelligence",
+  "description": "A state-of-the-art malware analysis sandbox, with all the features you need. High-volume sample submission in a customizable environment with detections and configuration extraction for many malware families.",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "help_online": "",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "name": "server_url",
+        "description": "The service-based URL to which you will connect and perform the automated operations.",
+        "type": "text",
+        "visible": true,
+        "editable": true,
+        "required": true,
+        "value": "https://tria.ge/api/v0/"
+      },
+      {
+        "title": "API Key",
+        "name": "api_key",
+        "description": "API key that is configured for your account for using the Hatching Triage APIs.",
+        "type": "password",
+        "visible": true,
+        "editable": true,
+        "required": true
+      },
+      {
+        "title": "Verify SSL",
+        "name": "verify_ssl",
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True.",
+        "type": "checkbox",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "value": true
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "query_samples",
+      "description": "Retrieves a detailed list of samples based on the parameters that you have specified.",
+      "category": "investigation",
+      "annotation": "query_samples",
+      "title": "Query Samples",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Subset",
+          "name": "subset",
+          "type": "select",
+          "tooltip": "Select a subset to control the data included in the response based on your selection. If not specified the default value is owned.",
+          "description": "(Optional) Select a subset to control the data included in the response based on your selection. If not specified the default value is owned.",
+          "options": [
+            "owned",
+            "public"
+          ],
+          "required": false,
+          "editable": true,
+          "visible": true
+        }
+      ],
+      "output_schema": {
+        "data": [
+          {
+            "id": "",
+            "status": "",
+            "kind": "",
+            "filename": "",
+            "private": "",
+            "submitted": ""
+          }
+        ],
+        "next": ""
+      }
+    },
+    {
+      "operation": "submit_sample",
+      "description": "Submit a file or an URL for the analysis.",
+      "category": "investigation",
+      "annotation": "submit_sample",
+      "title": "Submit Sample",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Type of Sample",
+          "name": "kind",
+          "tooltip": "Specify the type of submission that you want to perform for the analysis.",
+          "description": "Specify the type of submission that you want to perform for the analysis.",
+          "type": "select",
+          "options": [
+            "file",
+            "url"
+          ],
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "value": "url",
+          "onchange": {
+            "file": [
+              {
+                "name": "input",
+                "title": "Type",
+                "type": "select",
+                "options": [
+                  "Attachment ID",
+                  "File IRI"
+                ],
+                "editable": true,
+                "visible": true,
+                "required": true,
+                "description": "Choose between Attachment ID or a File IRI."
+              },
+              {
+                "name": "value",
+                "title": "Reference ID",
+                "type": "text",
+                "editable": true,
+                "visible": true,
+                "required": true,
+                "description": "Reference ID that is used to access the attachment metadata from the FortiSOAR™ Attachments module. In the playbook, if you select 'Attachment ID', this defaults to the {{vars.attachment_id}} value or if you select 'File IRI', then this defaults to the {{vars.file_iri}} value."
+              }
+            ],
+            "url": [
+              {
+                "name": "url",
+                "title": "URL",
+                "type": "text",
+                "tooltip": "Specify the URL that you want to submit for the analysis.",
+                "description": "Specify the URL that you want to submit for the analysis.",
+                "editable": true,
+                "visible": true,
+                "required": true
+              },
+              {
+                "name": "fetch",
+                "title": "Fetch the File from the URL",
+                "description": "(Optional) Fetch the file from the URL. The URL is downloaded as file instead of executed directly.",
+                "tooltip": "Fetch the file from the URL. The URL is downloaded as file instead of executed directly.",
+                "type": "checkbox",
+                "editable": true,
+                "visible": true,
+                "required": false,
+                "value": false
+              }
+            ]
+          }
+        },
+        {
+          "title": "Target",
+          "name": "target",
+          "tooltip": "Manually specify the filename of the sample. If not specified, the filename of the attached file is used.",
+          "description": "(Optional) Manually specify the filename of the sample. If not specified, the filename of the attached file is used.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": false
+        },
+        {
+          "title": "Interactive",
+          "name": "interactive",
+          "tooltip": "If set to true, the analysis profile must be chosen manually after static analysis has finished. The default value is false.",
+          "description": "(Optional) If set to true, the analysis profile must be chosen manually after static analysis has finished. The default value is false.",
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": false
+        },
+        {
+          "title": "Password",
+          "name": "password",
+          "tooltip": "A password that may be used to decrypt the provided file, usually an archive (zip/rar/etc).",
+          "description": "(Optional) A password that may be used to decrypt the provided file, usually an archive (zip/rar/etc).",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": false
+        },
+        {
+          "title": "Profiles",
+          "name": "profiles",
+          "tooltip": "A mapping of one or more files to one or more profiles.",
+          "description": "(Optional) A mapping of one or more files to one or more profiles.",
+          "type": "json",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "value": [
+            {
+              "id": "1111939c-2f66-4021-af7c-62a70e796f24",
+              "name": "myprofile",
+              "tags": [
+                "tag1",
+                "tag2"
+              ],
+              "network": "internet",
+              "timeout": 120
+            }
+          ]
+        },
+        {
+          "title": "User Tags",
+          "name": "user_tags",
+          "tooltip": "An array of user-defined strings that lets the user mark a sample. The resulting tags will be embedded in the reports. The total size cannot exceed 1kB and tags cannot be empty.",
+          "description": "(Optional) An array of user-defined strings that lets the user mark a sample. The resulting tags will be embedded in the reports. The total size cannot exceed 1kB and tags cannot be empty.",
+          "type": "json",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "value": ["tag1", "tag2"]
+        },
+        {
+          "title": "Timeout",
+          "name": "timeout",
+          "tooltip": "Specify the timeout of the analysis.",
+          "description": "(Optional) Specify the timeout of the analysis.",
+          "type": "integer",
+          "visible": true,
+          "editable": true,
+          "required": false
+        },
+        {
+          "title": "Network",
+          "name": "network",
+          "tooltip": "Specify the type of network routing to use. The default value is internet.",
+          "description": "(Optional) Specify the type of network routing to use. The default value is internet.",
+          "type": "select",
+          "options": [
+            "internet",
+            "drop",
+            "tor"
+          ],
+          "visible": true,
+          "editable": true,
+          "required": false
+        }
+      ],
+      "output_schema": {
+        "data": {
+          "id": "",
+          "status": "",
+          "kind": "",
+          "filename": "",
+          "private": "",
+          "submitted": ""
+        }
+      }
+    },
+    {
+      "operation": "get_sample",
+      "description": "Retrieves the sample details based on the sample ID that you have specified.",
+      "category": "investigation",
+      "annotation": "get_sample",
+      "title": "Get Sample",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Sample ID",
+          "name": "sample_id",
+          "type": "text",
+          "tooltip": "Specify the sample ID whose details you want to retrieve from Hatching Triage.",
+          "description": "Specify the sample ID whose details you want to retrieve from Hatching Triage.",
+          "required": true,
+          "editable": true,
+          "visible": true
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "status": "",
+        "kind": "",
+        "filename": "",
+        "private": "",
+        "tasks": [
+          {
+            "id": "",
+            "status": "",
+            "target": ""
+          }
+        ],
+        "submitted": "",
+        "completed": ""
+      }
+    },
+    {
+      "operation": "get_sample_summary",
+      "description": "Retrieves a short summary of the sample and its analysis tasks based on the sample ID that you have specified.",
+      "category": "investigation",
+      "annotation": "get_sample_summary",
+      "title": "Get Sample Summary",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Sample ID",
+          "name": "sample_id",
+          "type": "text",
+          "tooltip": "Specify the sample ID whose details you want to retrieve from Hatching Triage.",
+          "description": "Specify the sample ID whose details you want to retrieve from Hatching Triage.",
+          "required": true,
+          "editable": true,
+          "visible": true
+        }
+      ],
+      "output_schema": {
+        "sample":"",
+        "status":"",
+        "custom":"",
+        "owner":"",
+        "target":"",
+        "created":"",
+        "completed":"",
+        "score":"",
+        "sha256":"",
+        "tasks":{
+          "<some_id>":{
+            "kind":"",
+            "status":"",
+            "tags":"",
+            "score":"",
+            "target":"",
+            "backend":"",
+            "resource":"",
+            "platform":"",
+            "queue_id":""
+          }
+        }
+      }
+    },
+    {
+      "operation": "set_sample_profile",
+      "description": "When a sample is in the static_analysis status, a profile should be selected in order to continue.",
+      "category": "investigation",
+      "annotation": "set_sample_profile",
+      "title": "Set Sample Profile",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Sample ID",
+          "name": "sample_id",
+          "type": "text",
+          "tooltip": "Specify the sample ID for which you want to set the profile.",
+          "description": "Specify the sample ID for which you want to set the profile.",
+          "required": true,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Auto",
+          "name": "auto",
+          "type": "checkbox",
+          "tooltip": "Whether to have the system automatically select profiles.",
+          "description": "(Optional) Whether to have the system automatically select profiles.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Pick",
+          "name": "pick",
+          "type": "json",
+          "tooltip": "If an archive was submitted, the set of files to run with automatic profiles.",
+          "description": "(Optional) If an archive was submitted, the set of files to run with automatic profiles.",
+          "value": [
+            "file1",
+            "file2"
+          ],
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Profiles",
+          "name": "profiles",
+          "type": "json",
+          "tooltip": "A mapping of one or more files to one or more profiles.",
+          "description": "(Optional) A mapping of one or more files to one or more profiles.",
+          "value": [
+            {
+              "profile": "1111a5f4-dd72-4551-adc4-2165626156de"
+            }
+          ],
+          "required": false,
+          "editable": true,
+          "visible": true
+        }
+      ],
+      "output_schema": {}
+    },
+    {
+      "operation": "get_static_report",
+      "description": "Retrieves the generated static report based on the sample ID that you have specified.",
+      "category": "investigation",
+      "annotation": "get_static_report",
+      "title": "Get Static Report",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Sample ID",
+          "name": "sample_id",
+          "type": "text",
+          "tooltip": "Specify the sample ID for which you want to retrieve the report.",
+          "description": "Specify the sample ID for which you want to retrieve the report.",
+          "required": true,
+          "editable": true,
+          "visible": true
+        }
+      ],
+      "output_schema": {
+        "version": "",
+        "sample": {
+          "sample": "",
+          "kind": "",
+          "size": "",
+          "target": ""
+        },
+        "task": {
+          "task": "",
+          "target": ""
+        },
+        "analysis": {
+          "reported": "",
+          "score": ""
+        },
+        "files": [
+          {
+            "filename": "",
+            "filesize": "",
+            "md5": "",
+            "sha1": "",
+            "sha256": "",
+            "sha512": "",
+            "ssdeep": "",
+            "exts": [],
+            "tags": [],
+            "depth": "",
+            "kind": "",
+            "selected": "",
+            "runas": "",
+            "metadata": {
+              "pe": {
+                "timestamp": "",
+                "imports": [
+                  {
+                    "dll_name": "",
+                    "imports": []
+                  }
+                ],
+                "sections": [
+                  {
+                    "name": "",
+                    "offset": "",
+                    "virtual_size": "",
+                    "size": "",
+                    "characteristics": []
+                  }
+                ],
+                "header": {
+                  "entry_point": "",
+                  "magic_number": "",
+                  "dll_characteristics": [],
+                  "file_characteristics": []
+                },
+                "imphash": ""
+              }
+            }
+          }
+        ],
+        "unpack_count": "",
+        "error_count": ""
+      }
+    },
+    {
+      "operation": "get_report_triage",
+      "description": "Retrieves the generated Triage Report for a single task based on the sample ID and task ID that you have provided.",
+      "category": "investigation",
+      "annotation": "get_report_triage",
+      "title": "Get Report Triage",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Sample ID",
+          "name": "sample_id",
+          "type": "text",
+          "tooltip": "Specify the sample ID for which you want to retrieve the report.",
+          "description": "Specify the sample ID for which you want to retrieve the report.",
+          "required": true,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Task ID",
+          "name": "task_id",
+          "type": "text",
+          "tooltip": "Specify the task_id ID for which you want to retrieve the report.",
+          "description": "Specify the task_id ID for which you want to retrieve the report.",
+          "required": true,
+          "editable": true,
+          "visible": true
+        }
+      ],
+      "output_schema": {
+        "version": "",
+        "sample": {
+          "id": "",
+          "score": "",
+          "submitted": "",
+          "target": "",
+          "size": "",
+          "md5": "",
+          "sha1": "",
+          "sha256": "",
+          "sha512": "",
+          "ssdeep": "",
+          "static_tags": []
+        },
+        "task": {
+          "target": "",
+          "size": "",
+          "md5": "",
+          "sha1": "",
+          "sha256": "",
+          "sha512": "",
+          "ssdeep": "",
+          "static_tags": []
+        },
+        "analysis": {
+          "score": "",
+          "tags": [],
+          "ttp": [],
+          "features": [],
+          "submitted": "",
+          "reported": "",
+          "max_time_network": "",
+          "max_time_kernel": "",
+          "backend": "",
+          "resource": "",
+          "resource_tags": [],
+          "platform": ""
+        },
+        "processes": [
+          {
+            "procid": "",
+            "procid_parent": "",
+            "pid": "",
+            "ppid": "",
+            "cmd": "",
+            "image": "",
+            "orig": "",
+            "started": "",
+            "terminated": ""
+          }
+        ],
+        "signatures": [
+          {
+            "label": "",
+            "name": "",
+            "score": "",
+            "ttp": [],
+            "indicators": [
+              {
+                "ioc": "",
+                "description": "",
+                "procid": ""
+              }
+            ],
+            "desc": ""
+          }
+        ],
+        "tags": "",
+        "network": {
+          "flows": [
+            {
+              "id": "",
+              "src": "",
+              "dst": "",
+              "proto": "",
+              "pid": "",
+              "procid": "",
+              "first_seen": "",
+              "last_seen": "",
+              "rx_bytes": "",
+              "rx_packets": "",
+              "tx_bytes": "",
+              "tx_packets": "",
+              "protocols": [],
+              "domain": ""
+            }
+          ],
+          "requests": [
+            {
+              "flow": "",
+              "index": "",
+              "dns_request": {
+                "domains": [],
+                "questions": [
+                  {
+                    "name": "",
+                    "type": ""
+                  }
+                ]
+              }
+            }
+          ],
+          "ips": {
+            "<ip>": {
+              "cc": "",
+              "asn": ""
+            }
+          }
+        },
+        "dumped": [
+          {
+            "at": "",
+            "pid": "",
+            "procid": "",
+            "path": "",
+            "name": "",
+            "kind": "",
+            "origin": "",
+            "md5": "",
+            "sha1": "",
+            "sha256": "",
+            "sha512": "",
+            "ssdeep": "",
+            "size": ""
+          }
+        ]
+      }
+    },
+    {
+      "operation": "get_profiles",
+      "description": "Get the detailed list of profiles.",
+      "category": "investigation",
+      "annotation": "get_profiles",
+      "title": "Get Profiles",
+      "enabled": true,
+      "parameters": [],
+      "output_schema": {
+        "data": [
+          {
+            "id": "",
+            "name": "",
+            "tags": [],
+            "network": "",
+            "timeout": "",
+            "options": ""
+          }
+        ],
+        "next": ""
+      }
+    },
+    {
+      "operation": "create_profile",
+      "description": "Create a new profile based on the parameters that you have specified.",
+      "category": "investigation",
+      "annotation": "create_profile",
+      "title": "Create Profile",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Name",
+          "name": "name",
+          "tooltip": "Specify a unique name for the profile.",
+          "description": "Specify a unique name for the profile.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Tags",
+          "name": "tags",
+          "tooltip": "Specify the set of tags that is used to match this profile to samples.",
+          "description": "Specify the set of tags that is used to match this profile to samples.",
+          "type": "json",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "value": [
+            "tag1",
+            "tag2"
+          ]
+        },
+        {
+          "title": "Timeout",
+          "name": "timeout",
+          "tooltip": "Specify the timeout of the analysis in seconds.",
+          "description": "Specify the timeout of the analysis in seconds.",
+          "type": "integer",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Network",
+          "name": "network",
+          "tooltip": "Specify the type of networking that should be used when running the sample.",
+          "description": "(Optional) Specify the type of networking that should be used when running the sample.",
+          "type": "select",
+          "options": [
+            "drop",
+            "internet",
+            "tor",
+            "sim200",
+            "sim404",
+            "simnx"
+          ],
+          "visible": true,
+          "editable": true,
+          "required": false
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "name": "",
+        "tags": [],
+        "network": "",
+        "timeout": "",
+        "options": ""
+      }
+    },
+    {
+      "operation": "update_profile",
+      "description": "Update the profile based on the parameters specified. The stored profile is overwritten, so it is important that the submitted profile has all fields.",
+      "category": "investigation",
+      "annotation": "update_profile",
+      "title": "Update Profile",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Profile ID",
+          "name": "profile_id",
+          "tooltip": "Specify the profile ID of the profile that you want to update.",
+          "description": "Specify the profile ID of the profile that you want to update.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Name",
+          "name": "name",
+          "tooltip": "Specify a unique name for the profile.",
+          "description": "Specify a unique name for the profile.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Tags",
+          "name": "tags",
+          "tooltip": "Specify the set of tags that is used to match this profile to samples.",
+          "description": "Specify the set of tags that is used to match this profile to samples.",
+          "type": "json",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "value": [
+            "tag1",
+            "tag2"
+          ]
+        },
+        {
+          "title": "Timeout",
+          "name": "timeout",
+          "tooltip": "Specify the timeout of the analysis in seconds.",
+          "description": "Specify the timeout of the analysis in seconds.",
+          "type": "integer",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Network",
+          "name": "network",
+          "tooltip": "Specify the type of networking that should be used when running the sample.",
+          "description": "(Optional) Specify the type of networking that should be used when running the sample.",
+          "type": "select",
+          "options": [
+            "drop",
+            "internet",
+            "tor",
+            "sim200",
+            "sim404",
+            "simnx"
+          ],
+          "visible": true,
+          "editable": true,
+          "required": false
+        }
+      ],
+      "output_schema": {}
+    },
+    {
+      "operation": "delete_profile",
+      "description": "Delete the profile based on the profile ID that you have specified.",
+      "category": "investigation",
+      "annotation": "delete_profile",
+      "title": "Delete Profile",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Profile ID",
+          "name": "profile_id",
+          "tooltip": "Specify the profile ID of the profile that you want to delete.",
+          "description": "Specify the profile ID of the profile that you want to delete.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true
+        }
+      ],
+      "output_schema": {}
+    },
+    {
+      "operation": "search_by_query",
+      "description": "The Search API endpoint supports all filters and queries which can be used through the web interface, and allow you to search available analyses for a range of IoCs or file characteristics.",
+      "category": "investigation",
+      "annotation": "search_by_query",
+      "title": "Search By Query",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Query",
+          "name": "query",
+          "tooltip": "Specify the query to fetch the analysis records.",
+          "description": "Specify the query to fetch the analysis records. Refer this link for more information about query: https://tria.ge/docs/cloud-api/search/",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true
+        }
+      ],
+      "output_schema": {
+        "data": [
+          {
+            "id": "",
+            "status": "",
+            "kind": "",
+            "filename": "",
+            "private": "",
+            "submitted": "",
+            "completed": ""
+          }
+        ]
+      }
+    }
+  ]
+}
