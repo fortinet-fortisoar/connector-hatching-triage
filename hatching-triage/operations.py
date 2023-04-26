@@ -29,20 +29,16 @@ class HatchingTriage:
         try:
             endpoint = self.url + endpoint
             headers = {"Authorization": f"Bearer {self.api_key}"}
-            logger.error(f"----------------------method: {method} | endpoint: {endpoint} | headers: {headers} | params: {params} | data: {data}")
             response = request(method, endpoint, headers=headers, params=params, data=data, files=files, verify=self.verify_ssl)
 
             if response.status_code in [200, 201, 204]:
                 if response.text != "":
-                    j = response.json()
-                    logger.error(f"---------------------response: {j}")
-                    return j
+                    return response.json()
                 else:
                     return True
             else:
                 if response.text != "":
                     err_resp = response.json()
-                    logger.error(f"------------------error resp: {err_resp}")
                     failure_msg = err_resp.get("message") or err_resp.get("error", {}).get("message")
                     error_msg = 'Response [{0}:{1} Details: {2}]'.format(response.status_code, response.reason,
                                                                          failure_msg if failure_msg else '')

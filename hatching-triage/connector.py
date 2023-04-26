@@ -13,9 +13,7 @@ logger = get_logger("hatching-triage")
 class HatchingTriage(Connector):
     def execute(self, config, operation, params, **kwargs):
         try:
-            logger.error(f"----------------------operation1: {operation}")
             operation = operations.get(operation)
-            logger.error(f"----------------------operation2: {operation}")
         except Exception as err:
             logger.exception(err)
             raise ConnectorError(err)
