@@ -3,6 +3,7 @@
   All rights reserved.
   FORTINET CONFIDENTIAL & FORTINET PROPRIETARY SOURCE CODE
   Copyright end """
+
 import json
 
 from requests import request, exceptions as req_exceptions
