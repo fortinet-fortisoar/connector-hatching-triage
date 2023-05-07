@@ -26,10 +26,10 @@ class HatchingTriage:
         self.verify_ssl = config.get("verify_ssl")
         self.api_key = config.get("api_key")
 
-    def api_request(self, method, endpoint, params={}, data={}, files=None):
+    def api_request(self, method, endpoint, headers={}, params={}, data={}, files=None):
         try:
             endpoint = self.url + endpoint
-            headers = {"Authorization": f"Bearer {self.api_key}"}
+            headers.update({"Authorization": f"Bearer {self.api_key}"})
             response = request(method, endpoint, headers=headers, params=params, data=data, files=files, verify=self.verify_ssl)
 
             if response.status_code in [200, 201, 204]:
@@ -67,7 +67,17 @@ def build_params(params):
     new_params = {}
     for key, value in params.items():
         if value is False or value == 0 or value:
-            new_params[key] = value
+            if key in ("user_tags", "pick", "tags"):
+                new_params[key] = value.split(",")
+            elif key in ("network", "subset", "kind"):
+                new_params[key] = value.lower()
+            elif key == "profiles":
+                li = []
+                for _profile in value.split(","):
+                    li.append({"profile": _profile})
+                new_params[key] = li
+            else:
+                new_params[key] = value
     return new_params
 
 
@@ -117,18 +127,20 @@ def submit_sample(config, params):
     _type = params.get("kind")
     timeout = params.pop("timeout", None)
     network = params.pop("network", None)
-    defaults = dict()
-    timeout and defaults.update({"timeout": timeout})
-    network and defaults.update({"network": network})
-    defaults and params.update({"defaults": defaults})
+    headers = {"Content-Type": "application/json"}
+    timeout and params.update({"default.timeout": timeout})
+    network and params.update({"default.network": network})
+
     if _type == "url":
-        if params.get("fetch"):
+        fetch = params.pop("fetch", None)
+        if fetch:
             params.update({"kind": "fetch"})
-        response = ob.api_request(POST, "samples", data=params)
+        response = ob.api_request(POST, "samples", headers=headers, data=json.dumps(params))
     else:
         file_iri = handle_params(params)
         files = submitFile(file_iri)
-        params.update({"file": files})
+        params.pop("input", None)
+        params.pop("value", None)
         response = ob.api_request(POST, "samples", data=params, files=files)
     return response
 

@@ -2,7 +2,7 @@
   "name": "hatching-triage",
   "version": "1.0.0",
   "label": "Hatching Triage",
-  "category": "Threat Intelligence",
+  "category": "Malware Analysis",
   "description": "A state-of-the-art malware analysis sandbox, with all the features you need. High-volume sample submission in a customizable environment with detections and configuration extraction for many malware families.",
   "publisher": "Fortinet",
   "cs_approved": true,
@@ -45,43 +45,6 @@
   },
   "operations": [
     {
-      "operation": "query_samples",
-      "description": "Retrieves a detailed list of samples based on the parameters that you have specified.",
-      "category": "investigation",
-      "annotation": "query_samples",
-      "title": "Query Samples",
-      "enabled": true,
-      "parameters": [
-        {
-          "title": "Subset",
-          "name": "subset",
-          "type": "select",
-          "tooltip": "Select a subset to control the data included in the response based on your selection. If not specified the default value is owned.",
-          "description": "(Optional) Select a subset to control the data included in the response based on your selection. If not specified the default value is owned.",
-          "options": [
-            "owned",
-            "public"
-          ],
-          "required": false,
-          "editable": true,
-          "visible": true
-        }
-      ],
-      "output_schema": {
-        "data": [
-          {
-            "id": "",
-            "status": "",
-            "kind": "",
-            "filename": "",
-            "private": "",
-            "submitted": ""
-          }
-        ],
-        "next": ""
-      }
-    },
-    {
       "operation": "submit_sample",
       "description": "Submit a file or an URL for the analysis.",
       "category": "investigation",
@@ -96,15 +59,15 @@
           "description": "Specify the type of submission that you want to perform for the analysis.",
           "type": "select",
           "options": [
-            "file",
-            "url"
+            "File",
+            "Url"
           ],
           "visible": true,
           "editable": true,
           "required": true,
-          "value": "url",
+          "value": "Url",
           "onchange": {
-            "file": [
+            "File": [
               {
                 "name": "input",
                 "title": "Type",
@@ -128,7 +91,7 @@
                 "description": "Reference ID that is used to access the attachment metadata from the FortiSOAR™ Attachments module. In the playbook, if you select 'Attachment ID', this defaults to the {{vars.attachment_id}} value or if you select 'File IRI', then this defaults to the {{vars.file_iri}} value."
               }
             ],
-            "url": [
+            "Url": [
               {
                 "name": "url",
                 "title": "URL",
@@ -188,33 +151,22 @@
           "name": "profiles",
           "tooltip": "A mapping of one or more files to one or more profiles.",
           "description": "(Optional) A mapping of one or more files to one or more profiles.",
-          "type": "json",
+          "type": "text",
           "visible": true,
           "editable": true,
           "required": false,
-          "value": [
-            {
-              "id": "1111939c-2f66-4021-af7c-62a70e796f24",
-              "name": "myprofile",
-              "tags": [
-                "tag1",
-                "tag2"
-              ],
-              "network": "internet",
-              "timeout": 120
-            }
-          ]
+          "placeholder": "1111939c-2f66-4021-af7c-62a70e796f24,2111939c-2f66-4021-af7c-62a70e796f24"
         },
         {
           "title": "User Tags",
           "name": "user_tags",
           "tooltip": "An array of user-defined strings that lets the user mark a sample. The resulting tags will be embedded in the reports. The total size cannot exceed 1kB and tags cannot be empty.",
           "description": "(Optional) An array of user-defined strings that lets the user mark a sample. The resulting tags will be embedded in the reports. The total size cannot exceed 1kB and tags cannot be empty.",
-          "type": "json",
+          "type": "text",
           "visible": true,
           "editable": true,
           "required": false,
-          "value": ["tag1", "tag2"]
+          "placeholder": "tag1,tag2"
         },
         {
           "title": "Timeout",
@@ -233,9 +185,9 @@
           "description": "(Optional) Specify the type of network routing to use. The default value is internet.",
           "type": "select",
           "options": [
-            "internet",
-            "drop",
-            "tor"
+            "Internet",
+            "Drop",
+            "Tor"
           ],
           "visible": true,
           "editable": true,
@@ -254,11 +206,48 @@
       }
     },
     {
+      "operation": "query_samples",
+      "description": "Retrieves a detailed list of samples based on the parameters that you have specified.",
+      "category": "investigation",
+      "annotation": "query_samples",
+      "title": "Query Samples",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Subset",
+          "name": "subset",
+          "type": "select",
+          "tooltip": "Select a subset to control the data included in the response based on your selection. If not specified the default value is owned.",
+          "description": "(Optional) Select a subset to control the data included in the response based on your selection. If not specified the default value is owned.",
+          "options": [
+            "Owned",
+            "Public"
+          ],
+          "required": false,
+          "editable": true,
+          "visible": true
+        }
+      ],
+      "output_schema": {
+        "data": [
+          {
+            "id": "",
+            "status": "",
+            "kind": "",
+            "filename": "",
+            "private": "",
+            "submitted": ""
+          }
+        ],
+        "next": ""
+      }
+    },
+    {
       "operation": "get_sample",
       "description": "Retrieves the sample details based on the sample ID that you have specified.",
       "category": "investigation",
       "annotation": "get_sample",
-      "title": "Get Sample",
+      "title": "Get Sample by ID",
       "enabled": true,
       "parameters": [
         {
@@ -364,13 +353,10 @@
         {
           "title": "Pick",
           "name": "pick",
-          "type": "json",
+          "type": "text",
           "tooltip": "If an archive was submitted, the set of files to run with automatic profiles.",
           "description": "(Optional) If an archive was submitted, the set of files to run with automatic profiles.",
-          "value": [
-            "file1",
-            "file2"
-          ],
+          "placeholder": "file1,file2",
           "required": false,
           "editable": true,
           "visible": true
@@ -378,14 +364,10 @@
         {
           "title": "Profiles",
           "name": "profiles",
-          "type": "json",
+          "type": "text",
           "tooltip": "A mapping of one or more files to one or more profiles.",
           "description": "(Optional) A mapping of one or more files to one or more profiles.",
-          "value": [
-            {
-              "profile": "1111a5f4-dd72-4551-adc4-2165626156de"
-            }
-          ],
+          "placeholder": "1111a5f4-dd72-4551-adc4-2165626156de,2111a5f4-dd72-4551-adc4-2165626156de",
           "required": false,
           "editable": true,
           "visible": true
@@ -481,7 +463,7 @@
       "description": "Retrieves the generated Triage Report for a single task based on the sample ID and task ID that you have provided.",
       "category": "investigation",
       "annotation": "get_report_triage",
-      "title": "Get Report Triage",
+      "title": "Get Triage Report",
       "enabled": true,
       "parameters": [
         {
@@ -635,28 +617,6 @@
       }
     },
     {
-      "operation": "get_profiles",
-      "description": "Get the detailed list of profiles.",
-      "category": "investigation",
-      "annotation": "get_profiles",
-      "title": "Get Profiles",
-      "enabled": true,
-      "parameters": [],
-      "output_schema": {
-        "data": [
-          {
-            "id": "",
-            "name": "",
-            "tags": [],
-            "network": "",
-            "timeout": "",
-            "options": ""
-          }
-        ],
-        "next": ""
-      }
-    },
-    {
       "operation": "create_profile",
       "description": "Create a new profile based on the parameters that you have specified.",
       "category": "investigation",
@@ -679,14 +639,11 @@
           "name": "tags",
           "tooltip": "Specify the set of tags that is used to match this profile to samples.",
           "description": "Specify the set of tags that is used to match this profile to samples.",
-          "type": "json",
+          "type": "text",
           "visible": true,
           "editable": true,
           "required": true,
-          "value": [
-            "tag1",
-            "tag2"
-          ]
+          "placeholder": "tag1,tag2"
         },
         {
           "title": "Timeout",
@@ -705,12 +662,12 @@
           "description": "(Optional) Specify the type of networking that should be used when running the sample.",
           "type": "select",
           "options": [
-            "drop",
-            "internet",
-            "tor",
-            "sim200",
-            "sim404",
-            "simnx"
+            "Drop",
+            "Internet",
+            "Tor",
+            "Sim200",
+            "Sim404",
+            "Simnx"
           ],
           "visible": true,
           "editable": true,
@@ -724,6 +681,28 @@
         "network": "",
         "timeout": "",
         "options": ""
+      }
+    },
+    {
+      "operation": "get_profiles",
+      "description": "Get the detailed list of profiles.",
+      "category": "investigation",
+      "annotation": "get_profiles",
+      "title": "Get Profiles",
+      "enabled": true,
+      "parameters": [],
+      "output_schema": {
+        "data": [
+          {
+            "id": "",
+            "name": "",
+            "tags": [],
+            "network": "",
+            "timeout": "",
+            "options": ""
+          }
+        ],
+        "next": ""
       }
     },
     {
@@ -759,14 +738,11 @@
           "name": "tags",
           "tooltip": "Specify the set of tags that is used to match this profile to samples.",
           "description": "Specify the set of tags that is used to match this profile to samples.",
-          "type": "json",
+          "type": "text",
           "visible": true,
           "editable": true,
           "required": true,
-          "value": [
-            "tag1",
-            "tag2"
-          ]
+          "placeholder": "tag1,tag2"
         },
         {
           "title": "Timeout",
@@ -785,12 +761,12 @@
           "description": "(Optional) Specify the type of networking that should be used when running the sample.",
           "type": "select",
           "options": [
-            "drop",
-            "internet",
-            "tor",
-            "sim200",
-            "sim404",
-            "simnx"
+            "Drop",
+            "Internet",
+            "Tor",
+            "Sim200",
+            "Sim404",
+            "Simnx"
           ],
           "visible": true,
           "editable": true,
@@ -836,7 +812,8 @@
           "type": "text",
           "visible": true,
           "editable": true,
-          "required": true
+          "required": true,
+          "placeholder": "family:emotet"
         }
       ],
       "output_schema": {
