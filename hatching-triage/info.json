@@ -324,7 +324,7 @@
     },
     {
       "operation": "set_sample_profile",
-      "description": "When a sample is in the static_analysis status, a profile should be selected in order to continue.",
+      "description": "Set the sample profile to get the detailed report when a sample is in the static analysis status.",
       "category": "investigation",
       "annotation": "set_sample_profile",
       "title": "Set Sample Profile",
