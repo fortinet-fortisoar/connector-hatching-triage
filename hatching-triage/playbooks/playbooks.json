@@ -2,7 +2,7 @@
   "type": "workflow_collections",
   "data": [
     {
-      "uuid": "b32a91ad-8d9b-4dbe-97cf-7a2fce76aeed",
+      "uuid": "36607edd-d10a-484f-b567-99242340dc30",
       "@type": "WorkflowCollection",
       "name": "Sample - Hatching Triage - 1.0.0",
       "description": "A state-of-the-art malware analysis sandbox, with all the features you need. High-volume sample submission in a customizable environment with detections and configuration extraction for many malware families.",
@@ -15,10 +15,10 @@
       "workflows": [
         {
           "@type": "Workflow",
-          "uuid": "c1213cdd-3d12-49dc-b7ff-76510f132afb",
-          "collection": "/api/3/workflow_collections/b32a91ad-8d9b-4dbe-97cf-7a2fce76aeed",
+          "uuid": "bd4ac3ed-39f0-40db-bc11-b32ed31b42d3",
+          "collection": "/api/3/workflow_collections/36607edd-d10a-484f-b567-99242340dc30",
           "triggerLimit": null,
-          "description": "Submit a file or an URL for the analysis.",
+          "description": "Submit a file or an URL for analysis based on the selected sample type and the values that you have specified.",
           "name": "Submit Sample",
           "tag": "#Hatching Triage",
           "recordTags": [
@@ -30,16 +30,16 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/986622c5-c08a-4bfd-a3bd-afc9eef92126",
+          "triggerStep": "/api/3/workflow_steps/6c847bbf-a085-48c0-a69b-31aa6bc7ea01",
           "steps": [
             {
-              "uuid": "986622c5-c08a-4bfd-a3bd-afc9eef92126",
+              "uuid": "6c847bbf-a085-48c0-a69b-31aa6bc7ea01",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
               "status": null,
               "arguments": {
-                "route": "3a7ec671-2814-41c8-9bcf-357b21b3facf",
+                "route": "589167ae-74fe-49a9-90a5-f9e2e3a5875f",
                 "title": "Hatching Triage: Submit Sample",
                 "resources": [
                   "alerts"
@@ -59,7 +59,7 @@
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
             },
             {
-              "uuid": "0df3b85f-c56d-4956-8b4f-164b36370a8d",
+              "uuid": "1389d169-feef-4e4f-8293-5d360d79bfb2",
               "@type": "WorkflowStep",
               "name": "Submit Sample",
               "description": null,
@@ -68,7 +68,7 @@
                 "name": "Hatching Triage",
                 "config": "''",
                 "params": {
-                  "kind": "Url"
+                  "kind": "URL"
                 },
                 "version": "1.0.0",
                 "connector": "hatching-triage",
@@ -86,21 +86,21 @@
           "routes": [
             {
               "@type": "WorkflowRoute",
-              "uuid": "4a20cdce-0c42-4d48-b8d5-4b4822656a8e",
+              "uuid": "980532ba-ff72-4d88-88db-711f99148cc4",
               "label": null,
               "isExecuted": false,
               "name": "Start-> Submit Sample",
-              "sourceStep": "/api/3/workflow_steps/986622c5-c08a-4bfd-a3bd-afc9eef92126",
-              "targetStep": "/api/3/workflow_steps/0df3b85f-c56d-4956-8b4f-164b36370a8d"
+              "sourceStep": "/api/3/workflow_steps/6c847bbf-a085-48c0-a69b-31aa6bc7ea01",
+              "targetStep": "/api/3/workflow_steps/1389d169-feef-4e4f-8293-5d360d79bfb2"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "e1b1afab-7b6a-4100-8ddf-073de9f644e8",
-          "collection": "/api/3/workflow_collections/b32a91ad-8d9b-4dbe-97cf-7a2fce76aeed",
+          "uuid": "9c53fada-47be-4c2e-ad4c-b8582734acff",
+          "collection": "/api/3/workflow_collections/36607edd-d10a-484f-b567-99242340dc30",
           "triggerLimit": null,
-          "description": "Retrieves a detailed list of samples based on the parameters that you have specified.",
+          "description": "Retrieves a detailed list of samples based on the subset sample that you have specified.",
           "name": "Query Samples",
           "tag": "#Hatching Triage",
           "recordTags": [
@@ -112,16 +112,16 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/8042d6d9-5781-4097-a8a6-b3a7c6367c31",
+          "triggerStep": "/api/3/workflow_steps/cf38c416-d3ec-40a4-b0d2-15f02265cf43",
           "steps": [
             {
-              "uuid": "8042d6d9-5781-4097-a8a6-b3a7c6367c31",
+              "uuid": "cf38c416-d3ec-40a4-b0d2-15f02265cf43",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
               "status": null,
               "arguments": {
-                "route": "884c3580-1435-46f3-842d-9475aa611fe9",
+                "route": "53e48950-ba6a-4d88-a478-88bc558be46d",
                 "title": "Hatching Triage: Query Samples",
                 "resources": [
                   "alerts"
@@ -141,7 +141,7 @@
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
             },
             {
-              "uuid": "b8f92771-5411-4a4d-9be7-ff8f36c65f7e",
+              "uuid": "8a1b7efc-02df-4d6d-be70-aac92ca2525f",
               "@type": "WorkflowStep",
               "name": "Query Samples",
               "description": null,
@@ -166,19 +166,19 @@
           "routes": [
             {
               "@type": "WorkflowRoute",
-              "uuid": "b52ecc7e-0858-473e-9776-d1b42e6444b8",
+              "uuid": "5fca39d7-d95a-408d-85b2-f7cf64b7a3e3",
               "label": null,
               "isExecuted": false,
               "name": "Start-> Query Samples",
-              "sourceStep": "/api/3/workflow_steps/8042d6d9-5781-4097-a8a6-b3a7c6367c31",
-              "targetStep": "/api/3/workflow_steps/b8f92771-5411-4a4d-9be7-ff8f36c65f7e"
+              "sourceStep": "/api/3/workflow_steps/cf38c416-d3ec-40a4-b0d2-15f02265cf43",
+              "targetStep": "/api/3/workflow_steps/8a1b7efc-02df-4d6d-be70-aac92ca2525f"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "63301007-956f-4b76-8f23-b898d42e9ef4",
-          "collection": "/api/3/workflow_collections/b32a91ad-8d9b-4dbe-97cf-7a2fce76aeed",
+          "uuid": "13bc2785-e97e-4e4d-a411-b538bd555c05",
+          "collection": "/api/3/workflow_collections/36607edd-d10a-484f-b567-99242340dc30",
           "triggerLimit": null,
           "description": "Retrieves the sample details based on the sample ID that you have specified.",
           "name": "Get Sample by ID",
@@ -192,16 +192,16 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/b542d8c5-fea8-46de-bea2-e8384e4bf74f",
+          "triggerStep": "/api/3/workflow_steps/f118571f-90ab-49c3-9471-f789d21dbe3b",
           "steps": [
             {
-              "uuid": "b542d8c5-fea8-46de-bea2-e8384e4bf74f",
+              "uuid": "f118571f-90ab-49c3-9471-f789d21dbe3b",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
               "status": null,
               "arguments": {
-                "route": "8dfb1f0f-6e3d-4a25-a8eb-2ca755e1a677",
+                "route": "6f253a94-5f9b-47d6-b2ce-37dab990c729",
                 "title": "Hatching Triage: Get Sample by ID",
                 "resources": [
                   "alerts"
@@ -221,7 +221,7 @@
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
             },
             {
-              "uuid": "11275be4-7a16-4c5f-9040-aad09b95349f",
+              "uuid": "3442f23a-408d-4618-b0f7-cfc491d914d9",
               "@type": "WorkflowStep",
               "name": "Get Sample by ID",
               "description": null,
@@ -246,19 +246,19 @@
           "routes": [
             {
               "@type": "WorkflowRoute",
-              "uuid": "83a8b1fd-206a-497d-acd8-8a147c4987d1",
+              "uuid": "1b0a6bde-8908-4791-85e1-9b81c182135a",
               "label": null,
               "isExecuted": false,
               "name": "Start-> Get Sample by ID",
-              "sourceStep": "/api/3/workflow_steps/b542d8c5-fea8-46de-bea2-e8384e4bf74f",
-              "targetStep": "/api/3/workflow_steps/11275be4-7a16-4c5f-9040-aad09b95349f"
+              "sourceStep": "/api/3/workflow_steps/f118571f-90ab-49c3-9471-f789d21dbe3b",
+              "targetStep": "/api/3/workflow_steps/3442f23a-408d-4618-b0f7-cfc491d914d9"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "e27bffa5-f77c-45b4-b6ac-cb2cf4cbc5ca",
-          "collection": "/api/3/workflow_collections/b32a91ad-8d9b-4dbe-97cf-7a2fce76aeed",
+          "uuid": "d4233989-9a59-44b7-adae-4c9779b4da7c",
+          "collection": "/api/3/workflow_collections/36607edd-d10a-484f-b567-99242340dc30",
           "triggerLimit": null,
           "description": "Retrieves a short summary of the sample and its analysis tasks based on the sample ID that you have specified.",
           "name": "Get Sample Summary",
@@ -272,16 +272,16 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/286bdc9d-9316-475d-aab2-037e65f66a3c",
+          "triggerStep": "/api/3/workflow_steps/31948301-7014-4175-afaa-d619324e97e6",
           "steps": [
             {
-              "uuid": "286bdc9d-9316-475d-aab2-037e65f66a3c",
+              "uuid": "31948301-7014-4175-afaa-d619324e97e6",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
               "status": null,
               "arguments": {
-                "route": "997b87c8-a3ce-4e2a-8f74-0867c7a05ee0",
+                "route": "8aeac0ac-5b37-4f69-8e9a-400c1aef0a3e",
                 "title": "Hatching Triage: Get Sample Summary",
                 "resources": [
                   "alerts"
@@ -301,7 +301,7 @@
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
             },
             {
-              "uuid": "8d9e6f21-578e-4a9c-9313-494687d5fb89",
+              "uuid": "d773e824-6e2b-439b-a3fb-6e5ea6e8ea58",
               "@type": "WorkflowStep",
               "name": "Get Sample Summary",
               "description": null,
@@ -326,21 +326,21 @@
           "routes": [
             {
               "@type": "WorkflowRoute",
-              "uuid": "11d2a456-b5f3-431f-8f8a-85a4e73d9ea3",
+              "uuid": "849139e9-2302-446b-a333-17920f3c4081",
               "label": null,
               "isExecuted": false,
               "name": "Start-> Get Sample Summary",
-              "sourceStep": "/api/3/workflow_steps/286bdc9d-9316-475d-aab2-037e65f66a3c",
-              "targetStep": "/api/3/workflow_steps/8d9e6f21-578e-4a9c-9313-494687d5fb89"
+              "sourceStep": "/api/3/workflow_steps/31948301-7014-4175-afaa-d619324e97e6",
+              "targetStep": "/api/3/workflow_steps/d773e824-6e2b-439b-a3fb-6e5ea6e8ea58"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "b0bc04b8-f607-4c6f-b838-fe1c74964e06",
-          "collection": "/api/3/workflow_collections/b32a91ad-8d9b-4dbe-97cf-7a2fce76aeed",
+          "uuid": "7ba4143c-4c4d-4518-b0f5-1dfeaaf9f82f",
+          "collection": "/api/3/workflow_collections/36607edd-d10a-484f-b567-99242340dc30",
           "triggerLimit": null,
-          "description": "When a sample is in the static_analysis status, a profile should be selected in order to continue.",
+          "description": "Set the sample profile to get the detailed report when a sample is in the static analysis status based on the sample ID that you have specified.",
           "name": "Set Sample Profile",
           "tag": "#Hatching Triage",
           "recordTags": [
@@ -352,16 +352,16 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/2f87b568-9f23-48a0-b718-a8d0768c6782",
+          "triggerStep": "/api/3/workflow_steps/0bc5c626-b659-4bfb-8601-34047f7dda42",
           "steps": [
             {
-              "uuid": "2f87b568-9f23-48a0-b718-a8d0768c6782",
+              "uuid": "0bc5c626-b659-4bfb-8601-34047f7dda42",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
               "status": null,
               "arguments": {
-                "route": "9a168087-3b56-4373-99b9-89ec050f6d3c",
+                "route": "4af85aa5-a157-4d1d-aeb4-9820e6a411b1",
                 "title": "Hatching Triage: Set Sample Profile",
                 "resources": [
                   "alerts"
@@ -381,7 +381,7 @@
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
             },
             {
-              "uuid": "63e73bf7-97b6-4ff0-8a6a-380c8be2a880",
+              "uuid": "a02b79d4-afb1-4cd4-93ba-17be967f703f",
               "@type": "WorkflowStep",
               "name": "Set Sample Profile",
               "description": null,
@@ -406,19 +406,19 @@
           "routes": [
             {
               "@type": "WorkflowRoute",
-              "uuid": "e111be0d-1c73-4b97-9d13-6ca34bd20e02",
+              "uuid": "00b6f1af-db86-4d5d-bfc0-a93e5e59f169",
               "label": null,
               "isExecuted": false,
               "name": "Start-> Set Sample Profile",
-              "sourceStep": "/api/3/workflow_steps/2f87b568-9f23-48a0-b718-a8d0768c6782",
-              "targetStep": "/api/3/workflow_steps/63e73bf7-97b6-4ff0-8a6a-380c8be2a880"
+              "sourceStep": "/api/3/workflow_steps/0bc5c626-b659-4bfb-8601-34047f7dda42",
+              "targetStep": "/api/3/workflow_steps/a02b79d4-afb1-4cd4-93ba-17be967f703f"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "2fadcdf0-8693-4f00-8d96-3ac0f54ac483",
-          "collection": "/api/3/workflow_collections/b32a91ad-8d9b-4dbe-97cf-7a2fce76aeed",
+          "uuid": "d3bf198b-e5ca-445a-bedb-a672345ca3c2",
+          "collection": "/api/3/workflow_collections/36607edd-d10a-484f-b567-99242340dc30",
           "triggerLimit": null,
           "description": "Retrieves the generated static report based on the sample ID that you have specified.",
           "name": "Get Static Report",
@@ -432,16 +432,16 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/e723ff23-b654-4872-a373-d974799eb376",
+          "triggerStep": "/api/3/workflow_steps/be12ed22-47e7-4e43-a0e7-e1877b32ea46",
           "steps": [
             {
-              "uuid": "e723ff23-b654-4872-a373-d974799eb376",
+              "uuid": "be12ed22-47e7-4e43-a0e7-e1877b32ea46",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
               "status": null,
               "arguments": {
-                "route": "86bffd73-377f-4198-bcaa-3ad733bf63c0",
+                "route": "f9fce16e-ec15-4ffb-b0b6-5a2535ddb77f",
                 "title": "Hatching Triage: Get Static Report",
                 "resources": [
                   "alerts"
@@ -461,7 +461,7 @@
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
             },
             {
-              "uuid": "6216b482-bdde-445c-b5fd-e63a48dfd869",
+              "uuid": "1d7d6f22-7e6d-40a5-a0df-4a7ea911bb0a",
               "@type": "WorkflowStep",
               "name": "Get Static Report",
               "description": null,
@@ -486,21 +486,21 @@
           "routes": [
             {
               "@type": "WorkflowRoute",
-              "uuid": "f7c073a7-d6ef-49a3-9f5b-008d88f7de61",
+              "uuid": "1a57b663-8119-4170-b6e8-c0ad2ecc928d",
               "label": null,
               "isExecuted": false,
               "name": "Start-> Get Static Report",
-              "sourceStep": "/api/3/workflow_steps/e723ff23-b654-4872-a373-d974799eb376",
-              "targetStep": "/api/3/workflow_steps/6216b482-bdde-445c-b5fd-e63a48dfd869"
+              "sourceStep": "/api/3/workflow_steps/be12ed22-47e7-4e43-a0e7-e1877b32ea46",
+              "targetStep": "/api/3/workflow_steps/1d7d6f22-7e6d-40a5-a0df-4a7ea911bb0a"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "1bcfa7ea-df69-4565-bf9b-0ab66be61466",
-          "collection": "/api/3/workflow_collections/b32a91ad-8d9b-4dbe-97cf-7a2fce76aeed",
+          "uuid": "48e368ab-df8c-4571-9d08-64b8f22f1873",
+          "collection": "/api/3/workflow_collections/36607edd-d10a-484f-b567-99242340dc30",
           "triggerLimit": null,
-          "description": "Retrieves the generated Triage Report for a single task based on the sample ID and task ID that you have provided.",
+          "description": "Retrieves the generated Triage Report for a single task based on the sample and task IDs that you have provided.",
           "name": "Get Triage Report",
           "tag": "#Hatching Triage",
           "recordTags": [
@@ -512,16 +512,16 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/9dfae5c3-678a-49b3-b2c7-d5bf1884b0b6",
+          "triggerStep": "/api/3/workflow_steps/da880610-fe5b-432a-8fde-7f7415bfabcc",
           "steps": [
             {
-              "uuid": "9dfae5c3-678a-49b3-b2c7-d5bf1884b0b6",
+              "uuid": "da880610-fe5b-432a-8fde-7f7415bfabcc",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
               "status": null,
               "arguments": {
-                "route": "28d786a2-f295-406e-8e57-a16987e999cb",
+                "route": "3ccb1a81-6737-4dab-b20c-9354a6ecacac",
                 "title": "Hatching Triage: Get Triage Report",
                 "resources": [
                   "alerts"
@@ -541,7 +541,7 @@
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
             },
             {
-              "uuid": "85c4e467-1348-4804-8d37-7bc1292e61b8",
+              "uuid": "8ba45b38-0272-406f-96c4-80596f95db18",
               "@type": "WorkflowStep",
               "name": "Get Triage Report",
               "description": null,
@@ -566,21 +566,21 @@
           "routes": [
             {
               "@type": "WorkflowRoute",
-              "uuid": "af8b7796-3671-4383-9633-77b0549b9195",
+              "uuid": "8bb8266d-7386-4cfa-958b-332426b8dbb0",
               "label": null,
               "isExecuted": false,
               "name": "Start-> Get Triage Report",
-              "sourceStep": "/api/3/workflow_steps/9dfae5c3-678a-49b3-b2c7-d5bf1884b0b6",
-              "targetStep": "/api/3/workflow_steps/85c4e467-1348-4804-8d37-7bc1292e61b8"
+              "sourceStep": "/api/3/workflow_steps/da880610-fe5b-432a-8fde-7f7415bfabcc",
+              "targetStep": "/api/3/workflow_steps/8ba45b38-0272-406f-96c4-80596f95db18"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "e54bfeab-c339-41be-be27-b8779d1eb39d",
-          "collection": "/api/3/workflow_collections/b32a91ad-8d9b-4dbe-97cf-7a2fce76aeed",
+          "uuid": "a835e495-055f-42b2-95ba-104299aad61c",
+          "collection": "/api/3/workflow_collections/36607edd-d10a-484f-b567-99242340dc30",
           "triggerLimit": null,
-          "description": "Create a new profile based on the parameters that you have specified.",
+          "description": "Creates a new profile based on the name, tags, and other input parameters that you have specified.",
           "name": "Create Profile",
           "tag": "#Hatching Triage",
           "recordTags": [
@@ -592,16 +592,16 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/0deeeab1-3a6b-4cda-9c79-83204bb7fc4a",
+          "triggerStep": "/api/3/workflow_steps/831b19eb-fda8-4e87-97f5-a8565cdd9710",
           "steps": [
             {
-              "uuid": "0deeeab1-3a6b-4cda-9c79-83204bb7fc4a",
+              "uuid": "831b19eb-fda8-4e87-97f5-a8565cdd9710",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
               "status": null,
               "arguments": {
-                "route": "daef74ae-0f74-454c-ae8e-94b1392d63c1",
+                "route": "921d2953-a90e-4f6f-8be9-50137daff7f4",
                 "title": "Hatching Triage: Create Profile",
                 "resources": [
                   "alerts"
@@ -621,7 +621,7 @@
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
             },
             {
-              "uuid": "fc095a26-2fcc-497f-b829-e792b9be89f2",
+              "uuid": "ea9eaa52-baf9-4282-840b-25dfd7c302ce",
               "@type": "WorkflowStep",
               "name": "Create Profile",
               "description": null,
@@ -646,21 +646,21 @@
           "routes": [
             {
               "@type": "WorkflowRoute",
-              "uuid": "6401a5f6-a22f-4044-bc33-62e780180148",
+              "uuid": "964d8ce2-082e-42fd-9721-631989a64921",
               "label": null,
               "isExecuted": false,
               "name": "Start-> Create Profile",
-              "sourceStep": "/api/3/workflow_steps/0deeeab1-3a6b-4cda-9c79-83204bb7fc4a",
-              "targetStep": "/api/3/workflow_steps/fc095a26-2fcc-497f-b829-e792b9be89f2"
+              "sourceStep": "/api/3/workflow_steps/831b19eb-fda8-4e87-97f5-a8565cdd9710",
+              "targetStep": "/api/3/workflow_steps/ea9eaa52-baf9-4282-840b-25dfd7c302ce"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "2f634fc1-fb48-4a25-ba1d-2243e3bc1338",
-          "collection": "/api/3/workflow_collections/b32a91ad-8d9b-4dbe-97cf-7a2fce76aeed",
+          "uuid": "93e3ebf5-b1e2-4b1e-89dd-612ebdb82658",
+          "collection": "/api/3/workflow_collections/36607edd-d10a-484f-b567-99242340dc30",
           "triggerLimit": null,
-          "description": "Get the detailed list of profiles.",
+          "description": "Gets the detailed list of profiles.",
           "name": "Get Profiles",
           "tag": "#Hatching Triage",
           "recordTags": [
@@ -672,16 +672,16 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/4a026606-8a43-4dc3-97a7-14ddcd680e70",
+          "triggerStep": "/api/3/workflow_steps/d29fbc14-6e2c-44f7-a7f8-968b65b5c232",
           "steps": [
             {
-              "uuid": "4a026606-8a43-4dc3-97a7-14ddcd680e70",
+              "uuid": "d29fbc14-6e2c-44f7-a7f8-968b65b5c232",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
               "status": null,
               "arguments": {
-                "route": "060f4049-d646-4399-a5bf-ecfb59a5bcb3",
+                "route": "708faad2-a36e-4a0c-a531-7531f5b61b0d",
                 "title": "Hatching Triage: Get Profiles",
                 "resources": [
                   "alerts"
@@ -701,7 +701,7 @@
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
             },
             {
-              "uuid": "0d7b6507-e884-46e0-b741-180176a37996",
+              "uuid": "cf5faa8c-b294-435e-bf15-587094412c95",
               "@type": "WorkflowStep",
               "name": "Get Profiles",
               "description": null,
@@ -726,21 +726,21 @@
           "routes": [
             {
               "@type": "WorkflowRoute",
-              "uuid": "12dcd725-1f84-4574-8644-bb1579d05dd7",
+              "uuid": "c346cd0e-5752-4d8f-9068-dd89a95e8341",
               "label": null,
               "isExecuted": false,
               "name": "Start-> Get Profiles",
-              "sourceStep": "/api/3/workflow_steps/4a026606-8a43-4dc3-97a7-14ddcd680e70",
-              "targetStep": "/api/3/workflow_steps/0d7b6507-e884-46e0-b741-180176a37996"
+              "sourceStep": "/api/3/workflow_steps/d29fbc14-6e2c-44f7-a7f8-968b65b5c232",
+              "targetStep": "/api/3/workflow_steps/cf5faa8c-b294-435e-bf15-587094412c95"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "7027c65f-83e5-4ec8-9bd3-a3fdd66c8162",
-          "collection": "/api/3/workflow_collections/b32a91ad-8d9b-4dbe-97cf-7a2fce76aeed",
+          "uuid": "811ef86a-7c77-4bd7-a8bb-a16e2a67c8d8",
+          "collection": "/api/3/workflow_collections/36607edd-d10a-484f-b567-99242340dc30",
           "triggerLimit": null,
-          "description": "Update the profile based on the parameters specified. The stored profile is overwritten, so it is important that the submitted profile has all fields.",
+          "description": "Updates the profile based on the profile ID, name, tags, and other input parameters specified. The stored profile is overwritten, so it is important that the submitted profile contains all fields.",
           "name": "Update Profile",
           "tag": "#Hatching Triage",
           "recordTags": [
@@ -752,16 +752,16 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/f01a24de-0e46-4559-9fb5-440cc9e66dcf",
+          "triggerStep": "/api/3/workflow_steps/cfd9ab0a-51ee-4fc4-9375-da4f950672eb",
           "steps": [
             {
-              "uuid": "f01a24de-0e46-4559-9fb5-440cc9e66dcf",
+              "uuid": "cfd9ab0a-51ee-4fc4-9375-da4f950672eb",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
               "status": null,
               "arguments": {
-                "route": "a8e3ff7e-5bdc-4312-9dc4-6f87dd913f7b",
+                "route": "dea29195-d381-460f-8805-05466a14e57e",
                 "title": "Hatching Triage: Update Profile",
                 "resources": [
                   "alerts"
@@ -781,7 +781,7 @@
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
             },
             {
-              "uuid": "6977fc78-dd11-4d47-b4bb-1c63325d069d",
+              "uuid": "c10e77d1-2028-4cfc-96f2-a2ac1e526e0b",
               "@type": "WorkflowStep",
               "name": "Update Profile",
               "description": null,
@@ -806,21 +806,21 @@
           "routes": [
             {
               "@type": "WorkflowRoute",
-              "uuid": "b20b93a4-1519-4c79-8245-ddee9afdd127",
+              "uuid": "11fcc80b-df59-433d-b0fe-37f41f53ef0d",
               "label": null,
               "isExecuted": false,
               "name": "Start-> Update Profile",
-              "sourceStep": "/api/3/workflow_steps/f01a24de-0e46-4559-9fb5-440cc9e66dcf",
-              "targetStep": "/api/3/workflow_steps/6977fc78-dd11-4d47-b4bb-1c63325d069d"
+              "sourceStep": "/api/3/workflow_steps/cfd9ab0a-51ee-4fc4-9375-da4f950672eb",
+              "targetStep": "/api/3/workflow_steps/c10e77d1-2028-4cfc-96f2-a2ac1e526e0b"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "ade286e7-1698-44e7-a7dd-37e43872f8c8",
-          "collection": "/api/3/workflow_collections/b32a91ad-8d9b-4dbe-97cf-7a2fce76aeed",
+          "uuid": "4f893ff1-db3f-4eb2-9c71-abe545d604b0",
+          "collection": "/api/3/workflow_collections/36607edd-d10a-484f-b567-99242340dc30",
           "triggerLimit": null,
-          "description": "Delete the profile based on the profile ID that you have specified.",
+          "description": "Deletes a profile based on the profile ID that you have specified.",
           "name": "Delete Profile",
           "tag": "#Hatching Triage",
           "recordTags": [
@@ -832,16 +832,16 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/54107abc-4cff-4bef-89f6-4eb36de17443",
+          "triggerStep": "/api/3/workflow_steps/ad890f01-d6c1-4150-86f9-0e1a228b4c27",
           "steps": [
             {
-              "uuid": "54107abc-4cff-4bef-89f6-4eb36de17443",
+              "uuid": "ad890f01-d6c1-4150-86f9-0e1a228b4c27",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
               "status": null,
               "arguments": {
-                "route": "2021465c-c591-4943-ba36-f23d2c35c2f6",
+                "route": "197752f2-5f3c-4ace-98cc-ff5d9b89cee4",
                 "title": "Hatching Triage: Delete Profile",
                 "resources": [
                   "alerts"
@@ -861,7 +861,7 @@
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
             },
             {
-              "uuid": "b5483920-a08a-4a27-bdb4-21acc0dcc187",
+              "uuid": "ffdc05d1-a074-491d-8f44-19f02b2d9747",
               "@type": "WorkflowStep",
               "name": "Delete Profile",
               "description": null,
@@ -886,21 +886,21 @@
           "routes": [
             {
               "@type": "WorkflowRoute",
-              "uuid": "ad5998c0-2ccc-48f3-a549-c4b9cad9c58f",
+              "uuid": "628895c6-1e64-426f-ace4-8c65ddbf4287",
               "label": null,
               "isExecuted": false,
               "name": "Start-> Delete Profile",
-              "sourceStep": "/api/3/workflow_steps/54107abc-4cff-4bef-89f6-4eb36de17443",
-              "targetStep": "/api/3/workflow_steps/b5483920-a08a-4a27-bdb4-21acc0dcc187"
+              "sourceStep": "/api/3/workflow_steps/ad890f01-d6c1-4150-86f9-0e1a228b4c27",
+              "targetStep": "/api/3/workflow_steps/ffdc05d1-a074-491d-8f44-19f02b2d9747"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "370eb303-cade-457d-b927-e67fb5a22138",
-          "collection": "/api/3/workflow_collections/b32a91ad-8d9b-4dbe-97cf-7a2fce76aeed",
+          "uuid": "a73f96c3-efbe-469e-8d15-fed7f7c8b499",
+          "collection": "/api/3/workflow_collections/36607edd-d10a-484f-b567-99242340dc30",
           "triggerLimit": null,
-          "description": "The Search API endpoint supports all filters and queries which can be used through the web interface, and allow you to search available analyses for a range of IoCs or file characteristics.",
+          "description": "Searches all available analyses for a range of IoCs or file characteristics based on the search query that you have specified. The Search API endpoint supports all filters and queries which can be used through the web interface.",
           "name": "Search By Query",
           "tag": "#Hatching Triage",
           "recordTags": [
@@ -912,16 +912,16 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/515cd3aa-1473-4857-bfba-5053f1b55e7e",
+          "triggerStep": "/api/3/workflow_steps/735964d6-b551-4ab9-a292-4ae39ed004c8",
           "steps": [
             {
-              "uuid": "515cd3aa-1473-4857-bfba-5053f1b55e7e",
+              "uuid": "735964d6-b551-4ab9-a292-4ae39ed004c8",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
               "status": null,
               "arguments": {
-                "route": "c91eb206-9c17-4a96-8c19-fccdb93e0e05",
+                "route": "ca5521ba-7642-45e2-8b5b-3c43b81e7663",
                 "title": "Hatching Triage: Search By Query",
                 "resources": [
                   "alerts"
@@ -941,7 +941,7 @@
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
             },
             {
-              "uuid": "3dfac230-b8ad-47fd-85ec-b4ce09c707ad",
+              "uuid": "d960ac66-ad91-42b3-aa87-dc63dc286c37",
               "@type": "WorkflowStep",
               "name": "Search By Query",
               "description": null,
@@ -966,12 +966,12 @@
           "routes": [
             {
               "@type": "WorkflowRoute",
-              "uuid": "0881688f-721d-450d-bc53-e7ffd41a56ce",
+              "uuid": "471ff0ab-1dd8-4397-8c32-7adb5292e1f7",
               "label": null,
               "isExecuted": false,
               "name": "Start-> Search By Query",
-              "sourceStep": "/api/3/workflow_steps/515cd3aa-1473-4857-bfba-5053f1b55e7e",
-              "targetStep": "/api/3/workflow_steps/3dfac230-b8ad-47fd-85ec-b4ce09c707ad"
+              "sourceStep": "/api/3/workflow_steps/735964d6-b551-4ab9-a292-4ae39ed004c8",
+              "targetStep": "/api/3/workflow_steps/d960ac66-ad91-42b3-aa87-dc63dc286c37"
             }
           ]
         }

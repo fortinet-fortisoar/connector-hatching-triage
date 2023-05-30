@@ -5,9 +5,9 @@
   "category": "Malware Analysis",
   "description": "A state-of-the-art malware analysis sandbox, with all the features you need. High-volume sample submission in a customizable environment with detections and configuration extraction for many malware families.",
   "publisher": "Fortinet",
-  "cs_approved": true,
+  "cs_approved": false,
   "cs_compatible": true,
-  "help_online": "",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.0.0/hatching-triage/599/hatching-triage-v1-0-0",
   "icon_small_name": "small.png",
   "icon_large_name": "large.png",
   "configuration": {
@@ -15,7 +15,7 @@
       {
         "title": "Server URL",
         "name": "server_url",
-        "description": "The service-based URL to which you will connect and perform the automated operations.",
+        "description": "The service-based URL to connect and perform the automated operations.",
         "type": "text",
         "visible": true,
         "editable": true,
@@ -34,7 +34,7 @@
       {
         "title": "Verify SSL",
         "name": "verify_ssl",
-        "description": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True.",
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set to True.",
         "type": "checkbox",
         "required": false,
         "editable": true,
@@ -46,7 +46,7 @@
   "operations": [
     {
       "operation": "submit_sample",
-      "description": "Submit a file or an URL for the analysis.",
+      "description": "Submit a file or an URL for analysis based on the selected sample type and the values that you have specified.",
       "category": "investigation",
       "annotation": "submit_sample",
       "title": "Submit Sample",
@@ -55,17 +55,17 @@
         {
           "title": "Type of Sample",
           "name": "kind",
-          "tooltip": "Specify the type of submission that you want to perform for the analysis.",
-          "description": "Specify the type of submission that you want to perform for the analysis.",
+          "tooltip": "Select the submission type to perform the analysis. You can select from the following options:",
+          "description": "Select the submission type to perform the analysis. You can select from the following options:",
           "type": "select",
           "options": [
             "File",
-            "Url"
+            "URL"
           ],
           "visible": true,
           "editable": true,
           "required": true,
-          "value": "Url",
+          "value": "URL",
           "onchange": {
             "File": [
               {
@@ -79,7 +79,7 @@
                 "editable": true,
                 "visible": true,
                 "required": true,
-                "description": "Choose between Attachment ID or a File IRI."
+                "description": "Select from Attachment ID or File IRI."
               },
               {
                 "name": "value",
@@ -88,7 +88,7 @@
                 "editable": true,
                 "visible": true,
                 "required": true,
-                "description": "Reference ID that is used to access the attachment metadata from the FortiSOAR™ Attachments module. In the playbook, if you select 'Attachment ID', this defaults to the {{vars.attachment_id}} value or if you select 'File IRI', then this defaults to the {{vars.file_iri}} value."
+                "description": "Reference ID that is used to access the attachment metadata from FortiSOAR™'s Attachments module. If you have selected Attachment ID, this defaults to the {{vars.attachment_id}} value. If you have selected File IRI, then this defaults to the {{vars.file_iri}} value."
               }
             ],
             "Url": [
@@ -96,8 +96,8 @@
                 "name": "url",
                 "title": "URL",
                 "type": "text",
-                "tooltip": "Specify the URL that you want to submit for the analysis.",
-                "description": "Specify the URL that you want to submit for the analysis.",
+                "tooltip": "Specify the URL to submit for analysis in the URL field.",
+                "description": "Specify the URL to submit for analysis in the URL field.",
                 "editable": true,
                 "visible": true,
                 "required": true
@@ -105,8 +105,8 @@
               {
                 "name": "fetch",
                 "title": "Fetch the File from the URL",
-                "description": "(Optional) Fetch the file from the URL. The URL is downloaded as file instead of executed directly.",
-                "tooltip": "Fetch the file from the URL. The URL is downloaded as file instead of executed directly.",
+                "description": "Select this option to download the file before execution. If not selected, the file is executed directly from the specified URL.",
+                "tooltip": "Select this option to download the file before execution. If not selected, the file is executed directly from the specified URL.",
                 "type": "checkbox",
                 "editable": true,
                 "visible": true,
@@ -119,8 +119,8 @@
         {
           "title": "Target",
           "name": "target",
-          "tooltip": "Manually specify the filename of the sample. If not specified, the filename of the attached file is used.",
-          "description": "(Optional) Manually specify the filename of the sample. If not specified, the filename of the attached file is used.",
+          "tooltip": "Specify the filename of the sample. If not specified, the filename of the attached file is used.",
+          "description": "(Optional) Specify the filename of the sample. If not specified, the filename of the attached file is used.",
           "type": "text",
           "visible": true,
           "editable": true,
@@ -129,8 +129,8 @@
         {
           "title": "Interactive",
           "name": "interactive",
-          "tooltip": "If set to true, the analysis profile must be chosen manually after static analysis has finished. The default value is false.",
-          "description": "(Optional) If set to true, the analysis profile must be chosen manually after static analysis has finished. The default value is false.",
+          "tooltip": "Select to choose the analysis profile manually after static analysis has finished. The default value is set to false.",
+          "description": "(Optional) Select to choose the analysis profile manually after static analysis has finished. The default value is set to false.",
           "type": "checkbox",
           "visible": true,
           "editable": true,
@@ -139,8 +139,8 @@
         {
           "title": "Password",
           "name": "password",
-          "tooltip": "A password that may be used to decrypt the provided file, usually an archive (zip/rar/etc).",
-          "description": "(Optional) A password that may be used to decrypt the provided file, usually an archive (zip/rar/etc).",
+          "tooltip": "Specify a password to decrypt the provided file, usually an archive (zip/rar/etc).",
+          "description": "(Optional) Specify a password to decrypt the provided file, usually an archive (zip/rar/etc).",
           "type": "text",
           "visible": true,
           "editable": true,
@@ -149,8 +149,8 @@
         {
           "title": "Profiles",
           "name": "profiles",
-          "tooltip": "A mapping of one or more files to one or more profiles.",
-          "description": "(Optional) A mapping of one or more files to one or more profiles.",
+          "tooltip": "Specify a value to map one or more files to one or more profiles.",
+          "description": "(Optional) Specify a value to map one or more files to one or more profiles.",
           "type": "text",
           "visible": true,
           "editable": true,
@@ -160,8 +160,8 @@
         {
           "title": "User Tags",
           "name": "user_tags",
-          "tooltip": "An array of user-defined strings that lets the user mark a sample. The resulting tags will be embedded in the reports. The total size cannot exceed 1kB and tags cannot be empty.",
-          "description": "(Optional) An array of user-defined strings that lets the user mark a sample. The resulting tags will be embedded in the reports. The total size cannot exceed 1kB and tags cannot be empty.",
+          "tooltip": "Specify an array of user-defined strings that lets the user mark a sample. The resulting tags are embedded in the reports. The total size cannot exceed 1kB and tags cannot be empty.",
+          "description": "(Optional) Specify an array of user-defined strings that lets the user mark a sample. The resulting tags are embedded in the reports. The total size cannot exceed 1kB and tags cannot be empty.",
           "type": "text",
           "visible": true,
           "editable": true,
@@ -171,8 +171,8 @@
         {
           "title": "Timeout",
           "name": "timeout",
-          "tooltip": "Specify the timeout of the analysis.",
-          "description": "(Optional) Specify the timeout of the analysis.",
+          "tooltip": "Specify the timeout duration of the analysis.",
+          "description": "(Optional) Specify the timeout duration of the analysis.",
           "type": "integer",
           "visible": true,
           "editable": true,
@@ -181,8 +181,8 @@
         {
           "title": "Network",
           "name": "network",
-          "tooltip": "Specify the type of network routing to use. The default value is internet.",
-          "description": "(Optional) Specify the type of network routing to use. The default value is internet.",
+          "tooltip": "Specify the type of network routing to use.",
+          "description": "(Optional) Specify the type of network routing to use. You can choose from the following options: \n\nInternet\nDrop\nTor\n\nThe default is Internet.",
           "type": "select",
           "options": [
             "Internet",
@@ -207,7 +207,7 @@
     },
     {
       "operation": "query_samples",
-      "description": "Retrieves a detailed list of samples based on the parameters that you have specified.",
+      "description": "Retrieves a detailed list of samples based on the subset sample that you have specified.",
       "category": "investigation",
       "annotation": "query_samples",
       "title": "Query Samples",
@@ -217,8 +217,8 @@
           "title": "Subset",
           "name": "subset",
           "type": "select",
-          "tooltip": "Select a subset to control the data included in the response based on your selection. If not specified the default value is owned.",
-          "description": "(Optional) Select a subset to control the data included in the response based on your selection. If not specified the default value is owned.",
+          "tooltip": "Select a subset to control the data included in the response based on your selection. If not specified Owned is selected by default.",
+          "description": "(Optional) Select a subset to control the data included in the response based on your selection. If not specified Owned is selected by default.",
           "options": [
             "Owned",
             "Public"
@@ -254,8 +254,8 @@
           "title": "Sample ID",
           "name": "sample_id",
           "type": "text",
-          "tooltip": "Specify the sample ID whose details you want to retrieve from Hatching Triage.",
-          "description": "Specify the sample ID whose details you want to retrieve from Hatching Triage.",
+          "tooltip": "Specify the sample ID whose details to retrieve from Hatching Triage.",
+          "description": "Specify the sample ID whose details to retrieve from Hatching Triage.",
           "required": true,
           "editable": true,
           "visible": true
@@ -290,41 +290,41 @@
           "title": "Sample ID",
           "name": "sample_id",
           "type": "text",
-          "tooltip": "Specify the sample ID whose details you want to retrieve from Hatching Triage.",
-          "description": "Specify the sample ID whose details you want to retrieve from Hatching Triage.",
+          "tooltip": "Specify the sample ID whose details to retrieve from Hatching Triage.",
+          "description": "Specify the sample ID whose details to retrieve from Hatching Triage.",
           "required": true,
           "editable": true,
           "visible": true
         }
       ],
       "output_schema": {
-        "sample":"",
-        "status":"",
-        "custom":"",
-        "owner":"",
-        "target":"",
-        "created":"",
-        "completed":"",
-        "score":"",
-        "sha256":"",
-        "tasks":{
-          "<some_id>":{
-            "kind":"",
-            "status":"",
-            "tags":"",
-            "score":"",
-            "target":"",
-            "backend":"",
-            "resource":"",
-            "platform":"",
-            "queue_id":""
+        "sample": "",
+        "status": "",
+        "custom": "",
+        "owner": "",
+        "target": "",
+        "created": "",
+        "completed": "",
+        "score": "",
+        "sha256": "",
+        "tasks": {
+          "": {
+            "kind": "",
+            "status": "",
+            "tags": "",
+            "score": "",
+            "target": "",
+            "backend": "",
+            "resource": "",
+            "platform": "",
+            "queue_id": ""
           }
         }
       }
     },
     {
       "operation": "set_sample_profile",
-      "description": "Set the sample profile to get the detailed report when a sample is in the static analysis status.",
+      "description": "Set the sample profile to get the detailed report when a sample is in the static analysis status based on the sample ID that you have specified.",
       "category": "investigation",
       "annotation": "set_sample_profile",
       "title": "Set Sample Profile",
@@ -334,8 +334,8 @@
           "title": "Sample ID",
           "name": "sample_id",
           "type": "text",
-          "tooltip": "Specify the sample ID for which you want to set the profile.",
-          "description": "Specify the sample ID for which you want to set the profile.",
+          "tooltip": "Specify the sample ID for which to set the profile.",
+          "description": "Specify the sample ID for which to set the profile.",
           "required": true,
           "editable": true,
           "visible": true
@@ -344,8 +344,8 @@
           "title": "Auto",
           "name": "auto",
           "type": "checkbox",
-          "tooltip": "Whether to have the system automatically select profiles.",
-          "description": "(Optional) Whether to have the system automatically select profiles.",
+          "tooltip": "Select to have the system automatically select profiles.",
+          "description": "(Optional) Select to have the system automatically select profiles.",
           "required": false,
           "editable": true,
           "visible": true
@@ -354,8 +354,8 @@
           "title": "Pick",
           "name": "pick",
           "type": "text",
-          "tooltip": "If an archive was submitted, the set of files to run with automatic profiles.",
-          "description": "(Optional) If an archive was submitted, the set of files to run with automatic profiles.",
+          "tooltip": "Specify the set of files to run with automatic profiles, if an archive was submitted.",
+          "description": "(Optional) Specify the set of files to run with automatic profiles, if an archive was submitted.",
           "placeholder": "file1,file2",
           "required": false,
           "editable": true,
@@ -365,8 +365,8 @@
           "title": "Profiles",
           "name": "profiles",
           "type": "text",
-          "tooltip": "A mapping of one or more files to one or more profiles.",
-          "description": "(Optional) A mapping of one or more files to one or more profiles.",
+          "tooltip": "Specify a value to map one or more files to one or more profiles.",
+          "description": "(Optional) Specify a value to map one or more files to one or more profiles.",
           "placeholder": "1111a5f4-dd72-4551-adc4-2165626156de,2111a5f4-dd72-4551-adc4-2165626156de",
           "required": false,
           "editable": true,
@@ -387,8 +387,8 @@
           "title": "Sample ID",
           "name": "sample_id",
           "type": "text",
-          "tooltip": "Specify the sample ID for which you want to retrieve the report.",
-          "description": "Specify the sample ID for which you want to retrieve the report.",
+          "tooltip": "Specify the sample ID for which to retrieve the report.",
+          "description": "Specify the sample ID for which to retrieve the report.",
           "required": true,
           "editable": true,
           "visible": true
@@ -460,7 +460,7 @@
     },
     {
       "operation": "get_report_triage",
-      "description": "Retrieves the generated Triage Report for a single task based on the sample ID and task ID that you have provided.",
+      "description": "Retrieves the generated Triage Report for a single task based on the sample and task IDs that you have provided.",
       "category": "investigation",
       "annotation": "get_report_triage",
       "title": "Get Triage Report",
@@ -470,8 +470,8 @@
           "title": "Sample ID",
           "name": "sample_id",
           "type": "text",
-          "tooltip": "Specify the sample ID for which you want to retrieve the report.",
-          "description": "Specify the sample ID for which you want to retrieve the report.",
+          "tooltip": "Specify the sample ID for which to retrieve the report.",
+          "description": "Specify the sample ID for which to retrieve the report.",
           "required": true,
           "editable": true,
           "visible": true
@@ -480,8 +480,8 @@
           "title": "Task ID",
           "name": "task_id",
           "type": "text",
-          "tooltip": "Specify the task_id ID for which you want to retrieve the report.",
-          "description": "Specify the task_id ID for which you want to retrieve the report.",
+          "tooltip": "Specify the task_id ID for which to retrieve the report.",
+          "description": "Specify the task_id ID for which to retrieve the report.",
           "required": true,
           "editable": true,
           "visible": true
@@ -591,7 +591,7 @@
             }
           ],
           "ips": {
-            "<ip>": {
+            "": {
               "cc": "",
               "asn": ""
             }
@@ -618,7 +618,7 @@
     },
     {
       "operation": "create_profile",
-      "description": "Create a new profile based on the parameters that you have specified.",
+      "description": "Creates a new profile based on the name, tags, and other input parameters that you have specified.",
       "category": "investigation",
       "annotation": "create_profile",
       "title": "Create Profile",
@@ -637,8 +637,8 @@
         {
           "title": "Tags",
           "name": "tags",
-          "tooltip": "Specify the set of tags that is used to match this profile to samples.",
-          "description": "Specify the set of tags that is used to match this profile to samples.",
+          "tooltip": "Specify the set of tags to match this profile to samples.",
+          "description": "Specify the set of tags to match this profile to samples.",
           "type": "text",
           "visible": true,
           "editable": true,
@@ -648,8 +648,8 @@
         {
           "title": "Timeout",
           "name": "timeout",
-          "tooltip": "Specify the timeout of the analysis in seconds.",
-          "description": "Specify the timeout of the analysis in seconds.",
+          "tooltip": "Specify the timeout duration of the analysis in seconds.",
+          "description": "Specify the timeout duration of the analysis in seconds.",
           "type": "integer",
           "visible": true,
           "editable": true,
@@ -659,7 +659,7 @@
           "title": "Network",
           "name": "network",
           "tooltip": "Specify the type of networking that should be used when running the sample.",
-          "description": "(Optional) Specify the type of networking that should be used when running the sample.",
+          "description": "(Optional) Specify the type of networking that should be used when running the sample. You can choose from following options: \n\nDrop\nInternet\nTor\nSim200\nSim404\nSimnx",
           "type": "select",
           "options": [
             "Drop",
@@ -685,7 +685,7 @@
     },
     {
       "operation": "get_profiles",
-      "description": "Get the detailed list of profiles.",
+      "description": "Gets the detailed list of profiles.",
       "category": "investigation",
       "annotation": "get_profiles",
       "title": "Get Profiles",
@@ -707,7 +707,7 @@
     },
     {
       "operation": "update_profile",
-      "description": "Update the profile based on the parameters specified. The stored profile is overwritten, so it is important that the submitted profile has all fields.",
+      "description": "Updates the profile based on the profile ID, name, tags, and other input parameters specified. The stored profile is overwritten, so it is important that the submitted profile contains all fields.",
       "category": "investigation",
       "annotation": "update_profile",
       "title": "Update Profile",
@@ -716,8 +716,8 @@
         {
           "title": "Profile ID",
           "name": "profile_id",
-          "tooltip": "Specify the profile ID of the profile that you want to update.",
-          "description": "Specify the profile ID of the profile that you want to update.",
+          "tooltip": "Specify the profile ID of the profile that to update.",
+          "description": "Specify the profile ID of the profile that to update.",
           "type": "text",
           "visible": true,
           "editable": true,
@@ -758,7 +758,7 @@
           "title": "Network",
           "name": "network",
           "tooltip": "Specify the type of networking that should be used when running the sample.",
-          "description": "(Optional) Specify the type of networking that should be used when running the sample.",
+          "description": "(Optional) Specify the type of networking that should be used when running the sample. You can choose from following options: \n\nDrop\nInternet\nTor\nSim200\nSim404\nSimnx",
           "type": "select",
           "options": [
             "Drop",
@@ -777,7 +777,7 @@
     },
     {
       "operation": "delete_profile",
-      "description": "Delete the profile based on the profile ID that you have specified.",
+      "description": "Deletes a profile based on the profile ID that you have specified.",
       "category": "investigation",
       "annotation": "delete_profile",
       "title": "Delete Profile",
@@ -786,8 +786,8 @@
         {
           "title": "Profile ID",
           "name": "profile_id",
-          "tooltip": "Specify the profile ID of the profile that you want to delete.",
-          "description": "Specify the profile ID of the profile that you want to delete.",
+          "tooltip": "Specify the ID of the profile to delete.",
+          "description": "Specify the ID of the profile to delete.",
           "type": "text",
           "visible": true,
           "editable": true,
@@ -798,7 +798,7 @@
     },
     {
       "operation": "search_by_query",
-      "description": "The Search API endpoint supports all filters and queries which can be used through the web interface, and allow you to search available analyses for a range of IoCs or file characteristics.",
+      "description": "Searches all available analyses for a range of IoCs or file characteristics based on the search query that you have specified. The Search API endpoint supports all filters and queries which can be used through the web interface.",
       "category": "investigation",
       "annotation": "search_by_query",
       "title": "Search By Query",
@@ -808,7 +808,7 @@
           "title": "Query",
           "name": "query",
           "tooltip": "Specify the query to fetch the analysis records.",
-          "description": "Specify the query to fetch the analysis records. Refer this link for more information about query: https://tria.ge/docs/cloud-api/search/",
+          "description": "Specify the query to fetch the analysis records. Refer this link for more information about Hatching Triage queries: https://tria.ge/docs/cloud-api/search/",
           "type": "text",
           "visible": true,
           "editable": true,
